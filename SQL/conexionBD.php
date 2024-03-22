@@ -2,7 +2,7 @@
 $servername = "localhost"; 
 $usuario = "ufidelitas2024"; 
 $contraseña = "12345"; 
-$database = "BaseDatos"; 
+$database = "Base_Datos"; 
 
 $conn = new mysqli($servername, $usuario, $contraseña, $database);
 
@@ -14,3 +14,4 @@ if ($conn->connect_error) {
 
 $conn->close();
 ?>
+ 
