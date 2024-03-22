@@ -1,3 +1,18 @@
+CREATE TABLESPACE tbs_perm_01 DATAFILE 'tbs_perm_01.dbf' SIZE 100M;
+CREATE TEMPORARY TABLESPACE tbs_temp_01 TEMPFILE 'tbs_temp_01.dbf' SIZE 50M;
+CREATE USER proyecto 
+  IDENTIFIED BY "12345"
+  DEFAULT TABLESPACE tbs_perm_01
+  TEMPORARY TABLESPACE tbs_temp_01
+  QUOTA 20M on tbs_perm_01;
+
+GRANT create session TO proyecto;
+GRANT create table TO proyecto;
+GRANT create view TO proyecto;
+GRANT create any trigger TO proyecto;
+GRANT create any procedure TO proyecto;
+GRANT create sequence TO proyecto;
+GRANT create synonym TO proyecto;
 --Crear Tablas
 Create  Table Rol (
     Id_Rol VARCHAR2(50) PRIMARY KEY,
@@ -145,3 +160,132 @@ INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, 
 INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('18', '21/09/23', '03:30 pm', 'Asistida', '3', '8', '8');
 INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('19', '29/10/25', '04:00 pm', 'Pendiente', '4', '9', '9');
 INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('20', '07/11/23', '05:30 pm', 'Perdida', '5', '10', '10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

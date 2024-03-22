@@ -1,17 +1,28 @@
 <?php
-$servername = "localhost"; 
-$usuario = "ufidelitas2024"; 
-$contraseña = "12345"; 
-$database = "Base_Datos"; 
+$tns = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SID=SID)))";
+$usuario = "ufidelitas2024";
+$contraseña = "12345";
 
-$conn = new mysqli($servername, $usuario, $contraseña, $database);
+$conn = oci_connect($usuario, $contraseña, $tns);
 
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+if (!$conn) {
+    $error = oci_error();
+    die("Error de conexión: " . $error['message']);
 } else {
     echo "Conexión exitosa";
 }
 
-$conn->close();
+oci_close($conn);
 ?>
- 
+
+
+
+
+
+
+
+
+
+
+
+
