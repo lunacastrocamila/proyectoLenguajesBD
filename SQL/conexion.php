@@ -12,17 +12,4 @@ if (!$conn) {
     echo "Conexión exitosa";
 }
 
-oci_close($conn);
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
