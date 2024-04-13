@@ -78,104 +78,6 @@ CREATE TABLE LogCambios (
     FechaHora TIMESTAMP,
     Usuario VARCHAR2(50)
 );
-
-
---INSERTS!!!
-
--- Insertar roles en la tabla Rol
-INSERT INTO Rol (Id_Rol, DescripcionRol) VALUES ('ADMIN', 'Administrador');
-INSERT INTO Rol (Id_Rol, DescripcionRol) VALUES ('DOCTOR', 'Doctor');
-INSERT INTO Rol (Id_Rol, DescripcionRol) VALUES ('EMPLEADO', 'Empleado');
-INSERT INTO Rol (Id_Rol, DescripcionRol) VALUES ('PACIENTE', 'Paciente');
-
--- Inserts para la tabla Usuario 
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('johnsmith', 'pass1', 'Johnson', 'Brown', 'ADMIN');
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('marydoe', 'pass2', 'Martinez', 'Garcia', 'DOCTOR');
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('davidjones', 'pass3', 'Miller', 'Martinez', 'EMPLEADO');
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('sarahbrown', 'pass4', 'Anderson', 'Johnson', 'PACIENTE');
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('samwilson', 'pass5', 'Davis', 'Lopez', 'ADMIN');
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('emilyrodriguez', 'pass6', 'Garcia', 'Rodriguez', 'DOCTOR');
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('michaelclark', 'pass7', 'Hernandez', 'Smith', 'EMPLEADO');
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('laurasmith', 'pass8', 'Brown', 'Gonzalez', 'PACIENTE');
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('alexjohnson', 'pass9', 'Johnson', 'Taylor', 'ADMIN');
-INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('rachelwilliams', 'pass10', 'Williams', 'Jones', 'DOCTOR');
-
--- Inserts para la tabla Pacientes 
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('1', 'Juan', 'Garcia', 'Martinez');
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('2', 'Maria', 'Rodriguez', 'Lopez');
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('3', 'Carlos', 'Hernandez', 'Gonzalez');
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('4', 'Laura', 'Martinez', 'Diaz');
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('5', 'Luis', 'Perez', 'Sanchez');
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('6', 'Ana', 'Sanchez', 'Ramirez');
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('7', 'David', 'Gonzalez', 'Martin');
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('8', 'Paula', 'Lopez', 'Jimenez');
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('9', 'Sergio', 'Fernandez', 'Alvarez');
-INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES ('10', 'Elena', 'Diaz', 'Gomez');
-
--- Inserts para la tabla DatosClinicos 
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('1', 'Hipertensión', '1');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('2', 'Diabetes Tipo 2', '2');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('3', 'Asma', '3');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('4', 'EPOC', '4');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('5', 'Artritis Reumatoide', '5');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('6', 'Fibromialgia', '6');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('7', 'Depresión', '7');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('8', 'Síndrome del Intestino Irritable', '8');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('9', 'Cáncer de Mama', '9');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('10', 'Gastritis', '10');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('11', 'Hipotiroidismo', '1');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('12', 'Ansiedad', '2');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('13', 'Bronquitis Crónica', '3');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('14', 'Dermatitis Atópica', '4');
-INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES ('15', 'Insuficiencia Renal', '5');
-
--- Inserts para la tabla Especialidades 
-INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES ('1', 'Cardiología');
-INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES ('2', 'Dermatología');
-INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES ('3', 'Ginecología');
-INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES ('4', 'Oftalmología');
-INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES ('5', 'General')
-
--- Inserts para la tabla Doctores 
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('1', 'Juan', 'González', 'Martínez', '1');
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('2', 'María', 'Rodríguez', 'López', '2');
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('3', 'Carlos', 'Hernández', 'García', '3');
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('4', 'Laura', 'Martínez', 'Díaz', '4');
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('5', 'Luis', 'Pérez', 'Sanchez', '5');
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('6', 'Ana', 'García', 'Rodríguez', '1');
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('7', 'David', 'Hernández', 'López', '2');
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('8', 'Paula', 'Martínez', 'González', '3');
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('9', 'Sergio', 'López', 'Martínez', '4');
-INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES ('10', 'Elena', 'García', 'Rodríguez', '5');
-
--- Inserts para la tabla Citas 
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('1', '12/04/24', '08:30 am', 'Pendiente', '1', '1', '1');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('2', '15/05/23', '09:00 am', 'Asistida', '2', '2', '2');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('3', '18/06/24', '10:30 am', 'Pendiente', '3', '3', '3');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('4', '21/07/23', '11:00 am', 'Asistida', '4', '4', '4');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('5', '24/08/23', '02:00 pm', 'Perdida', '5', '5', '5');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('6', '27/09/24', '03:30 pm', 'Pendiente', '1', '6', '6');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('7', '03/10/24', '04:00 pm', 'Perdida', '2', '7', '7');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('8', '08/11/23', '05:30 pm', 'Asistida', '3', '8', '8');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('9', '12/12/24', '06:00 pm', 'Pendiente', '4', '9', '9');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('10', '18/01/23', '07:30 pm', 'Perdida', '5', '10', '10');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('11', '25/02/25', '08:00 am', 'Pendiente', '1', '1', '1');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('12', '03/03/23', '09:30 am', 'Asistida', '2', '2', '2');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('13', '10/04/25', '10:00 am', 'Pendiente', '3', '3', '3');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('14', '18/05/25', '11:30 am', 'Perdida', '4', '4', '4');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('15', '26/06/25', '12:00 pm', 'Asistida', '5', '5', '5');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('16', '04/07/25', '01:30 pm', 'Pendiente', '1', '6', '6');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('17', '12/08/23', '02:00 pm', 'Perdida', '2', '7', '7');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('18', '21/09/23', '03:30 pm', 'Asistida', '3', '8', '8');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('19', '29/10/25', '04:00 pm', 'Pendiente', '4', '9', '9');
-INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES ('20', '07/11/23', '05:30 pm', 'Perdida', '5', '10', '10');
-
-
-
-
-
-
-
 -- Triggers
 
 CREATE OR REPLACE TRIGGER trg_log_cambios
@@ -443,7 +345,127 @@ END;
 
 
 
+-- Secuencias
 
+-- Crear una secuencia para IDs de roles
+CREATE SEQUENCE seq_roles
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
+
+-- Crear una secuencia para IDs de usuarios
+CREATE SEQUENCE seq_usuarios
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
+
+-- Crear una secuencia para IDs de pacientes
+CREATE SEQUENCE seq_pacientes
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
+
+-- Crear una secuencia para IDs de doctores
+CREATE SEQUENCE seq_doctores
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
+
+-- Crear una secuencia para IDs de citas
+CREATE SEQUENCE seq_citas
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
+
+-- INSERTS
+
+-- Insertar roles en la tabla Rol utilizando la secuencia
+INSERT INTO Rol (Id_Rol, DescripcionRol) VALUES (seq_roles.NEXTVAL, 'Administrador');
+INSERT INTO Rol (Id_Rol, DescripcionRol) VALUES (seq_roles.NEXTVAL, 'Doctor');
+INSERT INTO Rol (Id_Rol, DescripcionRol) VALUES (seq_roles.NEXTVAL, 'Empleado');
+INSERT INTO Rol (Id_Rol, DescripcionRol) VALUES (seq_roles.NEXTVAL, 'Paciente');
+
+-- Inserts para la tabla Usuario utilizando la secuencia
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('johnsmith', 'pass1', 'Johnson', 'Brown', seq_roles.NEXTVAL);
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('marydoe', 'pass2', 'Martinez', 'Garcia', seq_roles.NEXTVAL);
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('davidjones', 'pass3', 'Miller', 'Martinez', seq_roles.NEXTVAL);
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('sarahbrown', 'pass4', 'Anderson', 'Johnson', seq_roles.NEXTVAL);
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('samwilson', 'pass5', 'Davis', 'Lopez', seq_roles.NEXTVAL);
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('emilyrodriguez', 'pass6', 'Garcia', 'Rodriguez', seq_roles.NEXTVAL);
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('michaelclark', 'pass7', 'Hernandez', 'Smith', seq_roles.NEXTVAL);
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('laurasmith', 'pass8', 'Brown', 'Gonzalez', seq_roles.NEXTVAL);
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('alexjohnson', 'pass9', 'Johnson', 'Taylor', seq_roles.NEXTVAL);
+INSERT INTO Usuario (Usuario, Contraseña, Apellido1User, Apellido2User, Id_Rol) VALUES ('rachelwilliams', 'pass10', 'Williams', 'Jones', seq_roles.NEXTVAL);
+
+-- Inserts para la tabla Pacientes utilizando la secuencia
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'Juan', 'Garcia', 'Martinez');
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'Maria', 'Rodriguez', 'Lopez');
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'Carlos', 'Hernandez', 'Gonzalez');
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'Laura', 'Martinez', 'Diaz');
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'Luis', 'Perez', 'Sanchez');
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'Ana', 'Sanchez', 'Ramirez');
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'David', 'Gonzalez', 'Martin');
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'Paula', 'Lopez', 'Jimenez');
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'Sergio', 'Fernandez', 'Alvarez');
+INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente) VALUES (seq_pacientes.NEXTVAL, 'Elena', 'Diaz', 'Gomez');
+
+-- Inserts para la tabla Doctores utilizando la secuencia
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'Juan', 'González', 'Martínez', '1');
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'María', 'Rodríguez', 'López', '2');
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'Carlos', 'Hernández', 'García', '3');
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'Laura', 'Martínez', 'Díaz', '4');
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'Luis', 'Pérez', 'Sanchez', '5');
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'Ana', 'García', 'Rodríguez', '1');
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'David', 'Hernández', 'López', '2');
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'Paula', 'Martínez', 'González', '3');
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'Sergio', 'López', 'Martínez', '4');
+INSERT INTO Doctores (Id_Doctores, NombreDoctor, Apellido1Doctor, Apellido2Doctor, Id_Especialidad) VALUES (seq_doctores.NEXTVAL, 'Elena', 'García', 'Rodríguez', '5');
+
+-- Inserts para la tabla DatosClinicos
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Hipertensión', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Diabetes Tipo 2', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Asma', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'EPOC', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Artritis Reumatoide', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Fibromialgia', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Depresión', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Síndrome del Intestino Irritable', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Cáncer de Mama', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Gastritis', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Hipotiroidismo', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Ansiedad', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Bronquitis Crónica', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Dermatitis Atópica', seq_pacientes.NEXTVAL);
+INSERT INTO DatosClinicos (Id_DatosClinicos, DescripcionDato, Id_Paciente) VALUES (seq_pacientes.NEXTVAL, 'Insuficiencia Renal', seq_pacientes.NEXTVAL);
+
+-- Inserts para la tabla Especialidades
+INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES (seq_especialidades.NEXTVAL, 'Cardiología');
+INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES (seq_especialidades.NEXTVAL, 'Dermatología');
+INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES (seq_especialidades.NEXTVAL, 'Ginecología');
+INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES (seq_especialidades.NEXTVAL, 'Oftalmología');
+INSERT INTO Especialidades (Id_Especialidad, DescripcionEspecialidad) VALUES (seq_especialidades.NEXTVAL, 'General');
+
+-- Inserts para la tabla Citas utilizando las secuencias
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '12/04/24', '08:30 am', 'Pendiente', '1', seq_pacientes.NEXTVAL, '1');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '15/05/23', '09:00 am', 'Asistida', '2', seq_pacientes.NEXTVAL, '2');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '18/06/24', '10:30 am', 'Pendiente', '3', seq_pacientes.NEXTVAL, '3');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '21/07/23', '11:00 am', 'Asistida', '4', seq_pacientes.NEXTVAL, '4');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '24/08/23', '02:00 pm', 'Perdida', '5', seq_pacientes.NEXTVAL, '5');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '27/09/24', '03:30 pm', 'Pendiente', '1', seq_pacientes.NEXTVAL, '6');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '03/10/24', '04:00 pm', 'Perdida', '2', seq_pacientes.NEXTVAL, '7');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '08/11/23', '05:30 pm', 'Asistida', '3', seq_pacientes.NEXTVAL, '8');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '12/12/24', '06:00 pm', 'Pendiente', '4', seq_pacientes.NEXTVAL, '9');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '18/01/23', '07:30 pm', 'Perdida', '5', seq_pacientes.NEXTVAL, '10');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '25/02/25', '08:00 am', 'Pendiente', '1', seq_pacientes.NEXTVAL, '1');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '03/03/23', '09:30 am', 'Asistida', '2', seq_pacientes.NEXTVAL, '2');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '10/04/25', '10:00 am', 'Pendiente', '3', seq_pacientes.NEXTVAL, '3');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '18/05/25', '11:30 am', 'Perdida', '4', seq_pacientes.NEXTVAL, '4');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '26/06/25', '12:00 pm', 'Asistida', '5', seq_pacientes.NEXTVAL, '5');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '04/07/25', '01:30 pm', 'Pendiente', '1', seq_pacientes.NEXTVAL, '6');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '12/08/23', '02:00 pm', 'Perdida', '2', seq_pacientes.NEXTVAL, '7');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '21/09/23', '03:30 pm', 'Asistida', '3', seq_pacientes.NEXTVAL, '8');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '29/10/25', '04:00 pm', 'Pendiente', '4', seq_pacientes.NEXTVAL, '9');
+INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores) VALUES (seq_citas.NEXTVAL, '07/11/23', '05:30 pm', 'Perdida', '5', seq_pacientes.NEXTVAL, '10');
 
 
 
