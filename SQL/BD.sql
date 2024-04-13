@@ -80,7 +80,8 @@ CREATE TABLE LogCambios (
 );
 -- Triggers
 
-CREATE OR REPLACE TRIGGER trg_log_cambios
+--trigger usuario 
+CREATE OR REPLACE TRIGGER trg_log_cambios_Usuario
 AFTER INSERT OR UPDATE OR DELETE ON Usuario
 FOR EACH ROW
 DECLARE
@@ -94,8 +95,157 @@ BEGIN
         v_action := 'DELETE';
     END IF;
 
-    INSERT INTO LogCambios (TablaAfectada, Id_Registro, Accion, FechaHora, Usuario)
+    INSERT INTO LogCambios (TablaAfectada, Id_Registro, Accion, FechaHora, UsuarioORCL)
     VALUES ('Usuario', COALESCE(:NEW.Usuario, :OLD.Usuario), v_action, SYSTIMESTAMP, USER);
+END;
+/
+--trigger Rol
+
+CREATE OR REPLACE TRIGGER trg_log_cambios_Rol
+AFTER INSERT OR UPDATE OR DELETE ON Rol
+FOR EACH ROW
+DECLARE
+    v_action VARCHAR2(10);
+BEGIN
+    IF INSERTING THEN
+        v_action := 'INSERT';
+    ELSIF UPDATING THEN
+        v_action := 'UPDATE';
+    ELSE
+        v_action := 'DELETE';
+    END IF;
+
+    INSERT INTO LogCambios (TablaAfectada, Id_Registro, Accion, FechaHora, UsuarioORCL)
+    VALUES ('Rol', COALESCE(:NEW.DescripcionRol, :OLD.DescripcionRol), v_action, SYSTIMESTAMP, USER);
+END;
+/
+
+--trigger Pacientes
+
+CREATE OR REPLACE TRIGGER trg_log_cambios_Pacientes
+AFTER INSERT OR UPDATE OR DELETE ON Pacientes
+FOR EACH ROW
+DECLARE
+    v_action VARCHAR2(10);
+BEGIN
+    IF INSERTING THEN
+        v_action := 'INSERT';
+    ELSIF UPDATING THEN
+        v_action := 'UPDATE';
+    ELSE
+        v_action := 'DELETE';
+    END IF;
+
+    INSERT INTO LogCambios (TablaAfectada, Id_Registro, Accion, FechaHora, UsuarioORCL)
+    VALUES ('Pacientes', COALESCE(:NEW.Id_Paciente, :OLD.Id_Paciente), v_action, SYSTIMESTAMP, USER);
+END;
+/
+
+--trigger DatosClinicos
+
+CREATE OR REPLACE TRIGGER trg_log_cambios_DatosClinicos
+AFTER INSERT OR UPDATE OR DELETE ON DatosClinicos
+FOR EACH ROW
+DECLARE
+    v_action VARCHAR2(10);
+BEGIN
+    IF INSERTING THEN
+        v_action := 'INSERT';
+    ELSIF UPDATING THEN
+        v_action := 'UPDATE';
+    ELSE
+        v_action := 'DELETE';
+    END IF;
+
+    INSERT INTO LogCambios (TablaAfectada, Id_Registro, Accion, FechaHora, UsuarioORCL)
+    VALUES ('DatosClinicos', COALESCE(:NEW.Id_DatosClinicos, :OLD.Id_DatosClinicos), v_action, SYSTIMESTAMP, USER);
+END;
+/
+
+--trigger DatosClinicos
+
+CREATE OR REPLACE TRIGGER trg_log_cambios_DatosClinicos
+AFTER INSERT OR UPDATE OR DELETE ON DatosClinicos
+FOR EACH ROW
+DECLARE
+    v_action VARCHAR2(10);
+BEGIN
+    IF INSERTING THEN
+        v_action := 'INSERT';
+    ELSIF UPDATING THEN
+        v_action := 'UPDATE';
+    ELSE
+        v_action := 'DELETE';
+    END IF;
+
+    INSERT INTO LogCambios (TablaAfectada, Id_Registro, Accion, FechaHora, UsuarioORCL)
+    VALUES ('DatosClinicos', COALESCE(:NEW.Id_DatosClinicos, :OLD.Id_DatosClinicos), v_action, SYSTIMESTAMP, USER);
+END;
+/
+
+--trigger Especialidades
+
+CREATE OR REPLACE TRIGGER trg_log_cambios_Especialidades
+AFTER INSERT OR UPDATE OR DELETE ON Especialidades
+FOR EACH ROW
+DECLARE
+    v_action VARCHAR2(10);
+BEGIN
+    IF INSERTING THEN
+        v_action := 'INSERT';
+    ELSIF UPDATING THEN
+        v_action := 'UPDATE';
+    ELSE
+        v_action := 'DELETE';
+    END IF;
+
+    INSERT INTO LogCambios (TablaAfectada, Id_Registro, Accion, FechaHora, UsuarioORCL)
+    VALUES ('Especialidades', COALESCE(:NEW.Id_Especialidad, :OLD.Id_Especialidad), v_action, SYSTIMESTAMP, USER);
+END;
+/
+
+--trigger Doctores
+
+CREATE OR REPLACE TRIGGER trg_log_cambios_Doctores
+AFTER INSERT OR UPDATE OR DELETE ON Doctores
+FOR EACH ROW
+DECLARE
+    v_action VARCHAR2(10);
+BEGIN
+    IF INSERTING THEN
+        v_action := 'INSERT';
+    ELSIF UPDATING THEN
+        v_action := 'UPDATE';
+    ELSE
+        v_action := 'DELETE';
+    END IF;
+
+    INSERT INTO LogCambios (TablaAfectada, Id_Registro, Accion, FechaHora, UsuarioORCL)
+    VALUES ('Doctores', COALESCE(:NEW.Id_Doctores, :OLD.Id_Doctores), v_action, SYSTIMESTAMP, USER);
+END;
+/
+
+
+
+
+--trigger Citas
+
+CREATE OR REPLACE TRIGGER trg_log_cambios_Citas
+AFTER INSERT OR UPDATE OR DELETE ON Citas
+FOR EACH ROW
+DECLARE
+    v_action VARCHAR2(10);
+BEGIN
+    IF INSERTING THEN
+        v_action := 'INSERT';
+    ELSIF UPDATING THEN
+        v_action := 'UPDATE';
+    ELSE
+        v_action := 'DELETE';
+    END IF;
+
+    INSERT INTO LogCambios (TablaAfectada, Id_Registro, Accion, FechaHora, UsuarioORCL)
+    VALUES ('Citas', COALESCE(:NEW.Id_Citas, :OLD.Id_Citas), v_action, SYSTIMESTAMP, USER);
 END;
 /
 
