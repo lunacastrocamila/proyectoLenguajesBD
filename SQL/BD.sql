@@ -352,53 +352,47 @@ END;
 
 -- Procedimientos
 
---Procedimiento para obtener los datos clínicos de un paciente:
---Este procedimiento toma como entrada el ID de un paciente y devuelve una lista de sus datos clínicos.
+--Procedimientos Almacenados
 
+--Procedimiento para obtener los datos clínicos de un paciente:
 CREATE OR REPLACE PROCEDURE GetDatosClinicos(
-    Id_Paciente IN VARCHAR2,
+    PacienteId IN VARCHAR2,
     DatosClinicos OUT SYS_REFCURSOR
 )
 AS
 BEGIN
     OPEN DatosClinicos FOR
-    SELECT * FROM DatosClinicos WHERE Id_Paciente = Id_Paciente;
+    SELECT * FROM DatosClinicos WHERE Id_Paciente = PacienteId;
 END;
 
 
---Procedimiento para programar una cita:
---Este procedimiento toma como entrada la información necesaria para programar una cita y la inserta en la tabla de citas.
-
-CREATE OR REPLACE PROCEDURE ProgramarCita(
-    Id_Cita IN VARCHAR2,
-    Fecha IN VARCHAR2,
-    Hora IN VARCHAR2,
-    Estado IN VARCHAR2,
-    Id_Especialidad IN VARCHAR2,
-    Id_Paciente IN VARCHAR2,
-    Id_Doctor IN VARCHAR2
-)
-AS
+DECLARE
+    datosCursor SYS_REFCURSOR;
 BEGIN
-    INSERT INTO Citas (Id_Citas, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctores)
-    VALUES (Id_Cita, Fecha, Hora, Estado, Id_Especialidad, Id_Paciente, Id_Doctor);
+    GetDatosClinicos('1', datosCursor); -- Aquí puedes especificar el Id_Paciente deseado
+    DBMS_SQL.RETURN_RESULT(datosCursor);
 END;
-
 
 --Procedimiento para obtener citas por especialidad:
---Este procedimiento toma como entrada el ID de una especialidad y devuelve una lista de citas programadas para esa especialidad.
 
 CREATE OR REPLACE PROCEDURE GetCitasPorEspecialidad(
-    Id_Especialidad IN VARCHAR2,
+    EspecialidadId IN VARCHAR2,
     Citas OUT SYS_REFCURSOR
 )
 AS
 BEGIN
     OPEN Citas FOR
-    SELECT * FROM Citas WHERE Id_Especialidad = Id_Especialidad;
+    SELECT * FROM Citas WHERE Id_Especialidad = EspecialidadID;
 END;
 
---Procedimiento para registrar un cliente
+DECLARE
+    datosCursor SYS_REFCURSOR;
+Begin
+    GetCitasPorEspecialidad('1', datosCursor); -- Aquí puedes especificar el Id_Paciente deseado
+    DBMS_SQL.RETURN_RESULT(datosCursor);
+END;
+
+--Procedimiento para registrar un paciente
 
 CREATE OR REPLACE PROCEDURE RegistrarPaciente(
     Id_Paciente IN VARCHAR2,
@@ -410,9 +404,64 @@ AS
 BEGIN
     INSERT INTO Pacientes (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente)
     VALUES (Id_Paciente, NombrePaciente, Apellido1Paciente, Apellido2Paciente);
+END; 
+
+--Procedimiento para obtener pacientes con datos clínicos
+
+CREATE OR REPLACE PROCEDURE ObtenerPacientesConDatosClinicos AS
+  CURSOR c_pacientes IS
+    SELECT p.Id_Paciente, p.NombrePaciente, p.Apellido1Paciente, p.Apellido2Paciente,
+           dc.DescripcionDato
+    FROM Pacientes p
+    LEFT JOIN DatosClinicos dc ON p.Id_Paciente = dc.Id_Paciente;
+
+  r_paciente c_pacientes%ROWTYPE;
+BEGIN
+  OPEN c_pacientes;
+  LOOP
+    FETCH c_pacientes INTO r_paciente;
+    EXIT WHEN c_pacientes%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE('ID: ' || r_paciente.Id_Paciente ||
+                         ' Nombre: ' || r_paciente.NombrePaciente ||
+                         ' Apellido: ' || r_paciente.Apellido1Paciente ||
+                         ' Dato Clínico: ' || r_paciente.DescripcionDato);
+  END LOOP;
+  CLOSE c_pacientes;
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error: no se obtuvieron DatosClinicos ' || SQLERRM);
 END;
+/
 
+--Procedimiento para obtener citas pendientes
 
+CREATE OR REPLACE PROCEDURE ObtenerCitasPendientes AS
+  CURSOR c_citas IS
+    SELECT c.Id_Citas, c.Fecha, c.Hora, c.Estado, p.NombrePaciente, d.NombreDoctor
+    FROM Citas c
+    JOIN Pacientes p ON c.Id_Paciente = p.Id_Paciente
+    JOIN Doctores d ON c.Id_Doctores = d.Id_Doctores
+    WHERE c.Estado = 'Pendiente';
+
+  r_cita c_citas%ROWTYPE;
+BEGIN
+  OPEN c_citas;
+  LOOP
+    FETCH c_citas INTO r_cita;
+    EXIT WHEN c_citas%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE('Cita ID: ' || r_cita.Id_Citas ||
+                         ' Fecha: ' || r_cita.Fecha ||
+                         ' Hora: ' || r_cita.Hora ||
+                         ' Estado: ' || r_cita.Estado ||
+                         ' Paciente: ' || r_cita.NombrePaciente ||
+                         ' Doctor: ' || r_cita.NombreDoctor);
+  END LOOP;
+  CLOSE c_citas;
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error: no se obtuvieron Citas pendientes ' || SQLERRM);
+END;
+/
 
 -- Cursores
 
@@ -526,6 +575,85 @@ CREATE SEQUENCE seq_citas
     START WITH 1
     INCREMENT BY 1
     NOMAXVALUE;
+
+-- Paquetes y expresiones regulares
+
+-- Paquete para validación de datos clínicos
+CREATE OR REPLACE PACKAGE DataValidationPackage AS
+    FUNCTION IsValidBloodType(bloodType IN VARCHAR2) RETURN BOOLEAN;
+END DataValidationPackage;
+/
+
+CREATE OR REPLACE PACKAGE BODY DataValidationPackage AS
+    -- Función para validar tipo de sangre usando expresiones regulares
+    FUNCTION IsValidBloodType(bloodType IN VARCHAR2) RETURN BOOLEAN IS
+    BEGIN
+        -- Expresión regular para validar tipo de sangre (A, B, AB, O)
+        RETURN REGEXP_LIKE(bloodType, '^(A|B|AB|O)[\+-]$');
+    END IsValidBloodType;
+END DataValidationPackage;
+/
+
+-- Ejemplo de uso 
+DECLARE
+    bloodType VARCHAR2(5) := 'A+';
+    isValid BOOLEAN;
+BEGIN
+    isValid := DataValidationPackage.IsValidBloodType(bloodType);
+    IF isValid THEN
+        DBMS_OUTPUT.PUT_LINE('Tipo de sangre válido.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Tipo de sangre no válido.');
+    END IF;
+END;
+/
+
+-- Paquete para validación de datos de contacto
+CREATE OR REPLACE PACKAGE ContactValidationPackage AS
+    FUNCTION IsValidPhoneNumber(phoneNumber IN VARCHAR2) RETURN BOOLEAN;
+    FUNCTION IsValidEmail(email IN VARCHAR2) RETURN BOOLEAN;
+END ContactValidationPackage;
+/
+
+CREATE OR REPLACE PACKAGE BODY ContactValidationPackage AS
+    -- Función para validar números de teléfono usando expresiones regulares
+    FUNCTION IsValidPhoneNumber(phoneNumber IN VARCHAR2) RETURN BOOLEAN IS
+    BEGIN
+        -- Expresión regular para validar números de teléfono
+        RETURN REGEXP_LIKE(phoneNumber, '^[0-9]{3}-[0-9]{3}-[0-9]{4}$');
+    END IsValidPhoneNumber;
+
+    -- Función para validar direcciones de correo electrónico usando expresiones regulares
+    FUNCTION IsValidEmail(email IN VARCHAR2) RETURN BOOLEAN IS
+    BEGIN
+        -- Expresión regular para validar direcciones de correo electrónico
+        RETURN REGEXP_LIKE(email, '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    END IsValidEmail;
+END ContactValidationPackage;
+/
+
+-- Ejemplo de uso 
+
+DECLARE
+    phoneNumber VARCHAR2(20) := '123-456-7890';
+    email VARCHAR2(100) := 'ejemplo@correo.com';
+BEGIN
+
+    IF ContactValidationPackage.IsValidPhoneNumber(phoneNumber) THEN
+        DBMS_OUTPUT.PUT_LINE('El número de teléfono es válido.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('El número de teléfono no es válido.');
+    END IF;
+
+    IF ContactValidationPackage.IsValidEmail(email) THEN
+        DBMS_OUTPUT.PUT_LINE('La dirección de correo electrónico es válida.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('La dirección de correo electrónico no es válida.');
+    END IF;
+END;
+/
+
+
 
 -- INSERTS
 
