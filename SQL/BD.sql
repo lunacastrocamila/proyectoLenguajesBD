@@ -13,6 +13,7 @@ GRANT create any trigger TO proyecto;
 GRANT create any procedure TO proyecto;
 GRANT create sequence TO proyecto;
 GRANT create synonym TO proyecto;
+
 --Crear Tablas
 Create  Table Rol (
     Id_Rol VARCHAR2(50) PRIMARY KEY,
@@ -69,6 +70,10 @@ CREATE TABLE Citas (
     FOREIGN KEY (Id_Paciente) REFERENCES Pacientes(Id_Paciente),
     FOREIGN KEY (Id_Doctores) REFERENCES Doctores(Id_Doctores)
 );
+
+
+
+--TRIGGERS de LOG 
 
 CREATE TABLE LogCambios (
     Id_Log NUMBER GENERATED ALWAYS AS IDENTITY,
@@ -350,8 +355,6 @@ BEGIN
     VALUES (Id_Especialidad, DescripcionEspecialidad);
 END;
 
--- Procedimientos
-
 --Procedimientos Almacenados
 
 --Procedimiento para obtener los datos clínicos de un paciente:
@@ -492,8 +495,7 @@ END;
 --Este procedimiento almacenado crea un cursor que une la tabla de pacientes con la de datos clínicos, devolviendo los datos de los pacientes y sus respectivos datos clínicos asociados.
 
 --Cursor para obtener la lista de citas pendientes:
-sql
-Copy code
+
 CREATE OR REPLACE PROCEDURE ObtenerCitasPendientes AS
   CURSOR c_citas IS
     SELECT c.Id_Citas, c.Fecha, c.Hora, c.Estado, p.NombrePaciente, d.NombreDoctor
@@ -516,11 +518,57 @@ BEGIN
                          ' Doctor: ' || r_cita.NombreDoctor);
   END LOOP;
   CLOSE c_citas;
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error: no se obtuvieron Citas pendientes ' || SQLERRM);
+END;
+/
+
+SET SERVEROUTPUT ON;
+BEGIN
+     ObtenerCitasPendientes;
 END;
 /
 --Este procedimiento almacenado crea un cursor que devuelve las citas pendientes junto con la información del paciente y del doctor asociados a cada cita.
 
 --Cursor para obtener la lista de doctores y sus especialidades:
+
+CREATE OR REPLACE PROCEDURE ObtenerCitasPendientes AS
+  CURSOR c_citas IS
+    SELECT c.Id_Citas, c.Fecha, c.Hora, c.Estado, p.NombrePaciente, d.NombreDoctor
+    FROM Citas c
+    JOIN Pacientes p ON c.Id_Paciente = p.Id_Paciente
+    JOIN Doctores d ON c.Id_Doctores = d.Id_Doctores
+    WHERE c.Estado = 'Pendiente';
+
+  r_cita c_citas%ROWTYPE;
+BEGIN
+  OPEN c_citas;
+  LOOP
+    FETCH c_citas INTO r_cita;
+    EXIT WHEN c_citas%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE('Cita ID: ' || r_cita.Id_Citas ||
+                         ' Fecha: ' || r_cita.Fecha ||
+                         ' Hora: ' || r_cita.Hora ||
+                         ' Estado: ' || r_cita.Estado ||
+                         ' Paciente: ' || r_cita.NombrePaciente ||
+                         ' Doctor: ' || r_cita.NombreDoctor);
+  END LOOP;
+  CLOSE c_citas;
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error: no se obtuvieron Citas pendientes ' || SQLERRM);
+END;
+/
+
+SET SERVEROUTPUT ON;
+BEGIN
+     ObtenerCitasPendientes;
+END;
+/
+
+
+---------------------------------------------------------------------------------------------------------
 
 CREATE OR REPLACE PROCEDURE ObtenerDoctoresConEspecialidades AS
   CURSOR c_doctores IS
@@ -538,10 +586,17 @@ BEGIN
                          ' Especialidad: ' || r_doctor.DescripcionEspecialidad);
   END LOOP;
   CLOSE c_doctores;
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error: No se obtuvieron los doctores o las especialidades ' || SQLERRM);
 END;
 /
---Este procedimiento almacenado crea un cursor que devuelve la lista de doctores junto con sus especialidades.
 
+SET SERVEROUTPUT ON;
+BEGIN
+     ObtenerDoctoresConEspecialidades ;
+END;
+/
 
 
 -- Secuencias
