@@ -107,6 +107,9 @@ $especialidad = isset($response_doctores[0]['DESCRIPCIONESPECIALIDAD']) ? $respo
         <h1>Registrar nuevo doctor</h1>
         <div class="login">
             <form method="GET" action="<?php echo isset($_GET['id']) ? '../../php/modificar-doctor.php' : '../../php/agregar-doctor.php'; ?>">
+                <!-- Campo de entrada oculto para el ID -->
+                <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>">
+
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" value="<?php echo $nombre_doctor; ?>">
                 

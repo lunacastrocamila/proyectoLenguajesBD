@@ -24,7 +24,7 @@ echo $query_sql;
 // Verificar la respuesta de la API
 if ($response_eliminar_cita) {
     // Cita eliminada correctamente, redirigir al usuario a la página de administración de citas
-    //header('Location: ../');
+    header('Location: ../');
     exit;
 } else {
     // Error al eliminar la cita, redirigir al usuario con un mensaje de error

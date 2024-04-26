@@ -137,6 +137,9 @@ $response_areas_clinicas = call_api($url_areas_clinicas);
         <div class="login">
             <img src="../../img/4cb234b73934bd35d8237862250327df9ad0faea" alt="Logo">
             <form method="GET" action="<?php echo isset($_GET['id']) ? '../../php/modificar-cita.php' : '../../php/agregar-cita.php'; ?>">
+                <!-- Campo de entrada oculto para el ID -->
+                <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>">
+
                 <label for="paciente">Paciente:</label>
                 <select name="paciente" id="paciente">
                     <?php foreach ($response_pacientes as $paciente_item): ?>

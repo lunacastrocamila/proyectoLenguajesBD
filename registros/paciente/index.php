@@ -106,6 +106,9 @@ $apellido2_paciente = isset($response_pacientes[0]['APELLIDO2PACIENTE']) ? $resp
         <h1>Registrar nuevo paciente</h1>
         <div class="login">
             <form method="GET" action="<?php echo isset($_GET['id']) ? '../../php/modificar-paciente.php' : '../../php/agregar-paciente.php'; ?>">
+                <!-- Campo de entrada oculto para el ID -->
+                <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>">
+                
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" value="<?php echo $nombre_paciente; ?>">
                 

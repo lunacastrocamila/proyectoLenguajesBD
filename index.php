@@ -103,6 +103,7 @@ $response_citas = call_api($url_citas);
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Doctor</th>
+                    <th>Estado</th>
                     <th></th>
                 </tr>
             </thead>
@@ -115,6 +116,12 @@ $response_citas = call_api($url_citas);
                         <td><?php echo $cita['HORA']; ?></td>
                         <td><?php echo $cita['NOMBREDOCTOR']; ?></td>
                         <td>
+                            <select onchange="actualizarEstadoCita(this.value, <?php echo $cita['ID_CITAS']; ?>)">
+                                <option value="pendiente" <?php echo ($cita['ESTADO'] == 'pendiente') ? 'selected' : ''; ?>>Pendiente</option>
+                                <option value="asistida" <?php echo ($cita['ESTADO'] == 'asistida') ? 'selected' : ''; ?>>Asistida</option>
+                            </select>
+                        </td>
+                        <td>
                             <a href="registros/citas?id=<?php echo $cita['ID_CITAS']; ?>" class="btnEditar"><button><img src="img/1d8d3457136176fa7fd05cfd094c9c4bce34b516"></button></a>
                             <a href="php/eliminar-cita.php?id=<?php echo $cita['ID_CITAS']; ?>" class="btnEditar"><button><img src="img/332ca27ff0266b4be269614f7a7a7ac57f30fb6f"></button></a>
                         </td>
@@ -123,5 +130,24 @@ $response_citas = call_api($url_citas);
             </tbody>
         </table>
     </div>
+    <script>
+            function actualizarEstadoCita(estado, citaId) {
+                // Realizar una solicitud AJAX para actualizar el estado de la cita en la base de datos
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "php/actualizar-estado-cita.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // Actualización exitosa, puedes realizar alguna acción adicional si es necesario
+                        } else {
+                            // Manejo de errores si la solicitud falla
+                            console.error("Hubo un error al actualizar el estado de la cita");
+                        }
+                    }
+                };
+                xhr.send("estado=" + estado + "&cita_id=" + citaId);
+            }
+        </script>
 </body>
 </html>

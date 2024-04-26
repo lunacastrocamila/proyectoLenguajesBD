@@ -116,7 +116,7 @@ $response_doctores = call_api($url_doctores);
                     <td><?php echo $usuario['DESCRIPCIONROL']; ?></td>
                     <td>
                         <a href="../../registros/usuario?usuario=<?php echo $usuario['USUARIO']; ?>" class="btnEditar"><button><img src="../../img/1d8d3457136176fa7fd05cfd094c9c4bce34b516"></button></a>
-                        <a href="php/eliminar-usuario.php?usuario=<?php echo $usuario['USUARIO']; ?>" class="btnEditar"><button><img src="../../img/332ca27ff0266b4be269614f7a7a7ac57f30fb6f"></button></a>
+                        <a href="../../php/eliminar-usuario.php?usuario=<?php echo $usuario['USUARIO']; ?>" class="btnEditar"><button><img src="../../img/332ca27ff0266b4be269614f7a7a7ac57f30fb6f"></button></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -143,7 +143,7 @@ $response_doctores = call_api($url_doctores);
                     <td><?php echo $paciente['APELLIDO1PACIENTE'] . ' ' . $paciente['APELLIDO2PACIENTE']; ?></td>
                     <td>
                         <a href="../../registros/paciente?id=<?php echo $paciente['ID_PACIENTE']; ?>" class="btnEditar"><button><img src="../../img/1d8d3457136176fa7fd05cfd094c9c4bce34b516"></button></a>
-                        <a href="php/eliminar-paciente.php?id=<?php echo $paciente['ID_PACIENTE']; ?>" class="btnEditar"><button><img src="../../img/332ca27ff0266b4be269614f7a7a7ac57f30fb6f"></button></a>
+                        <a href="../../php/eliminar-paciente.php?id=<?php echo $paciente['ID_PACIENTE']; ?>" class="btnEditar"><button><img src="../../img/332ca27ff0266b4be269614f7a7a7ac57f30fb6f"></button></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -172,7 +172,7 @@ $response_doctores = call_api($url_doctores);
                     <td><?php echo $doctor['DESCRIPCIONESPECIALIDAD']; ?></td>
                     <td>
                         <a href="../../registros/doctor?id=<?php echo $doctor['ID_DOCTORES']; ?>" class="btnEditar"><button><img src="../../img/1d8d3457136176fa7fd05cfd094c9c4bce34b516"></button></a>
-                        <a href="php/eliminar-doctor.php?id=<?php echo $doctor['ID_DOCTORES']; ?>" class="btnEditar"><button><img src="../../img/332ca27ff0266b4be269614f7a7a7ac57f30fb6f"></button></a>
+                        <a href="../../php/eliminar-doctor.php?id=<?php echo $doctor['ID_DOCTORES']; ?>" class="btnEditar"><button><img src="../../img/332ca27ff0266b4be269614f7a7a7ac57f30fb6f"></button></a>
                     </td>
                 </tr>
             <?php endforeach; ?>

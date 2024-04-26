@@ -1,6 +1,6 @@
 <?php
 $tns = "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SID=SID)))";
-$usuario = "ufidelitas2024";
+$usuario = "Proyecto";
 $contraseña = "12345";
 
 $conn = oci_connect($usuario, $contraseña, $tns);

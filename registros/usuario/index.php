@@ -86,6 +86,7 @@ if (isset($_GET['usuario'])) {
         }
 
         input[type="text"],
+        input[type="password"],
         select {
             width: calc(100% - 24px);
             padding: 12px;
@@ -120,15 +121,21 @@ if (isset($_GET['usuario'])) {
     <div class="container">
         <h1>Modificar usuario</h1>
         <div class="login">
-            <form method="GET" action="<?php echo isset($_GET['usuario']) ? '../../php/modificar-usuario.php' : '../../php/agregar-usuario.php'; ?>">
+            <form method="POST" action="<?php echo isset($_GET['usuario']) ? '../../php/modificar-usuario.php' : '../../php/agregar-usuario.php'; ?>">
+                <!-- Campo de entrada oculto para el ID -->
+                <input type="hidden" name="usuario" value="<?php echo isset($_GET['usuario']) ? $_GET['usuario'] : ''; ?>">
+
                 <label for="nombre">Nombre de usuario:</label>
-                <input type="text" id="nombre" name="nombre" value="<?php echo $nombre_usuario; ?>" readonly>
-                
+                <input type="text" id="nombre" name="nombre" value="<?php echo $nombre_usuario; ?>" >
+
                 <label for="apellido1">Primer apellido:</label>
                 <input type="text" id="apellido1" name="apellido1" value="<?php echo $apellido1_usuario; ?>">
 
                 <label for="apellido2">Segundo apellido:</label>
                 <input type="text" id="apellido2" name="apellido2" value="<?php echo $apellido2_usuario; ?>">
+
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" value=""> <!-- Aquí agregué el campo para la contraseña -->
 
                 <label for="rol">Rol:</label>
                 <select name="rol" id="rol">
@@ -139,6 +146,7 @@ if (isset($_GET['usuario'])) {
 
                 <input type="submit" value="Guardar cambios">
             </form>
+
         </div>
     </div>
 </body>

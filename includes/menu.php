@@ -72,7 +72,8 @@
     <img src="/proyectoLenguajesBD/img/5f8621c689f88a3266c14e6dc4292e0564cda50d">
     <h2>Menú</h2>
     <ul>
-        <p class="nombre_usuario"><?php echo $_SESSION['usuario']; ?></p>
+        <a href="/proyectoLenguajesBD/login"><p class="nombre_usuario"><?php echo $_SESSION['usuario']; ?>(Logout)</p></a>
+        <hr>
         <li><a href="/proyectoLenguajesBD/">Administrar citas</a></li>
         <li><a href="/proyectoLenguajesBD/administrar/usuarios">Administrar usuarios</a></li>
     </ul>

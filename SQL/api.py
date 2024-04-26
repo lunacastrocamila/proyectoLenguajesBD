@@ -15,6 +15,12 @@ def conectar_oracle():
     conexion = cx_Oracle.connect(user=user, password=password, dsn=dsn_tns)
     return conexion
 
+# Función para determinar si una consulta es de selección o no
+def es_consulta_select(query):
+    # Convertir la consulta a minúsculas para facilitar la comparación
+    query = query.strip().lower()
+    return query.startswith("select")
+
 # Función para ejecutar el query y obtener resultados
 def ejecutar_query(query):
     try:
@@ -22,19 +28,25 @@ def ejecutar_query(query):
         conexion = conectar_oracle()
         cursor = conexion.cursor()
         
-        # Ejecuta el query
-        cursor.execute(query)
-        
-        # Obtiene los resultados
-        rows = cursor.fetchall()
-        
-        # Convierte los resultados a una lista de diccionarios para JSON
-        results = []
-        for row in rows:
-            result_dict = {}
-            for i, col in enumerate(cursor.description):
-                result_dict[col[0]] = row[i]
-            results.append(result_dict)
+        # Verifica si la consulta es un SELECT
+        if es_consulta_select(query):
+            # Ejecuta el query de selección
+            cursor.execute(query)
+            # Obtiene los resultados
+            rows = cursor.fetchall()
+            # Convierte los resultados a una lista de diccionarios para JSON
+            results = []
+            for row in rows:
+                result_dict = {}
+                for i, col in enumerate(cursor.description):
+                    result_dict[col[0]] = row[i]
+                results.append(result_dict)
+        else:
+            # Si no es un SELECT, ejecuta la consulta directamente
+            cursor.execute(query)
+            # Realiza un commit para aplicar los cambios
+            conexion.commit()
+            results = {'message': 'Operación ejecutada exitosamente.'}
         
         # Cierra el cursor y la conexión
         cursor.close()
