@@ -76,12 +76,12 @@ CREATE TABLE Citas (
 --TRIGGERS de LOG 
 
 CREATE TABLE LogCambios (
-    Id_Log NUMBER GENERATED ALWAYS AS IDENTITY,
+    Id_Log NUMBER PRIMARY KEY,
     TablaAfectada VARCHAR2(50),
     Id_Registro VARCHAR2(50),
     Accion VARCHAR2(10),
     FechaHora TIMESTAMP,
-    Usuario VARCHAR2(50)
+    UsuarioORCL VARCHAR2(50)
 );
 -- Triggers
 
