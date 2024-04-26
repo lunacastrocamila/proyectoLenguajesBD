@@ -1,4 +1,28 @@
-<?php include 'php/comprobarUsuario.php'; ?>
+<?php 
+include 'php/comprobarUsuario.php'; 
+session_start();
+
+// URL de la API local
+$api_url = 'http://localhost:5000/consultar_oracle';
+
+// Función para hacer la solicitud a la API
+function call_api($url) {
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($curl);
+    curl_close($curl);
+    return json_decode($response, true);
+}
+
+// Obtener citas de la API con detalles de paciente, especialidad y doctor
+$url_citas = $api_url . '?query=' . urlencode('SELECT Citas.*, Pacientes.NombrePaciente, Especialidades.DescripcionEspecialidad, Doctores.NombreDoctor 
+                                                FROM Citas 
+                                                INNER JOIN Pacientes ON Citas.Id_Paciente = Pacientes.Id_Paciente
+                                                INNER JOIN Especialidades ON Citas.Id_Especialidad = Especialidades.Id_Especialidad
+                                                INNER JOIN Doctores ON Citas.Id_Doctores = Doctores.Id_Doctores');
+$response_citas = call_api($url_citas);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,27 +99,27 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Cédula</th>
                     <th>Área</th>
                     <th>Fecha</th>
                     <th>Hora</th>
+                    <th>Doctor</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <?php for ($i = 0; $i < 10; $i++): ?>
+                <?php foreach ($response_citas as $cita): ?>
                     <tr>
-                        <td>Jefferson Chaves</td>
-                        <td>11845789625</td>
-                        <td>Odontología</td>
-                        <td>23/04/2024</td>
-                        <td>9:30 AM</td>
+                        <td><?php echo $cita['NOMBREPACIENTE']; ?></td>
+                        <td><?php echo $cita['DESCRIPCIONESPECIALIDAD']; ?></td>
+                        <td><?php echo $cita['FECHA']; ?></td>
+                        <td><?php echo $cita['HORA']; ?></td>
+                        <td><?php echo $cita['NOMBREDOCTOR']; ?></td>
                         <td>
-                            <a href="registros/citas" class="btnEditar"><button><img src="img/1d8d3457136176fa7fd05cfd094c9c4bce34b516"></button></a>
-                            <a href="" class="btnEditar"><button><img src="img/332ca27ff0266b4be269614f7a7a7ac57f30fb6f"></button></a>
+                            <a href="registros/citas?id=<?php echo $cita['ID_CITAS']; ?>" class="btnEditar"><button><img src="img/1d8d3457136176fa7fd05cfd094c9c4bce34b516"></button></a>
+                            <a href="php/eliminar-cita.php?id=<?php echo $cita['ID_CITAS']; ?>" class="btnEditar"><button><img src="img/332ca27ff0266b4be269614f7a7a7ac57f30fb6f"></button></a>
                         </td>
                     </tr>
-                <?php endfor ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

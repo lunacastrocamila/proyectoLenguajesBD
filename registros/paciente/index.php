@@ -14,29 +14,14 @@ function call_api($url) {
     return json_decode($response, true);
 }
 
-// Obtener todos los roles disponibles
-$url_roles = $api_url . '?query=' . urlencode('SELECT * FROM Rol');
-$response_roles = call_api($url_roles);
+// Obtener todos los pacientes disponibles
+$url_pacientes = $api_url . '?query=' . urlencode('SELECT * FROM Pacientes');
+$response_pacientes = call_api($url_pacientes);
 
 // Inicializar variables para los valores del formulario
-$nombre_usuario = '';
-$apellido1_usuario = '';
-$apellido2_usuario = '';
-$rol_usuario = isset($response_roles[0]['DESCRIPCIONROL']) ? $response_roles[0]['DESCRIPCIONROL'] : '';
-
-// Obtener detalles del usuario si se proporciona un nombre de usuario en la URL
-if (isset($_GET['usuario'])) {
-    $usuario = $_GET['usuario'];
-    $query_sql = "SELECT Usuario.*, Rol.DescripcionRol FROM Usuario INNER JOIN Rol ON Usuario.Id_Rol = Rol.Id_Rol WHERE Usuario = '$usuario'";
-    $url_get_usuario = $api_url . '?query=' . urlencode($query_sql);
-    $response_usuario = call_api($url_get_usuario);
-    if ($response_usuario) {
-        $nombre_usuario = $response_usuario[0]['USUARIO'];
-        $apellido1_usuario = $response_usuario[0]['APELLIDO1USER'];
-        $apellido2_usuario = $response_usuario[0]['APELLIDO2USER'];
-        $rol_usuario = $response_usuario[0]['DescripcionRol'];
-    }
-}
+$nombre_paciente = isset($response_pacientes[0]['NOMBREPACIENTE']) ? $response_pacientes[0]['NOMBREPACIENTE'] : '';
+$apellido1_paciente = isset($response_pacientes[0]['APELLIDO1PACIENTE']) ? $response_pacientes[0]['APELLIDO1PACIENTE'] : '';
+$apellido2_paciente = isset($response_pacientes[0]['APELLIDO2PACIENTE']) ? $response_pacientes[0]['APELLIDO2PACIENTE'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +29,7 @@ if (isset($_GET['usuario'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar usuario</title>
+    <title>Registrar paciente</title>
     <!-- Estilos CSS -->
     <style>
         body {
@@ -118,26 +103,19 @@ if (isset($_GET['usuario'])) {
 <body>
     <?php include '../../includes/menu.php'; ?>
     <div class="container">
-        <h1>Modificar usuario</h1>
+        <h1>Registrar nuevo paciente</h1>
         <div class="login">
-            <form method="GET" action="<?php echo isset($_GET['usuario']) ? '../../php/modificar-usuario.php' : '../../php/agregar-usuario.php'; ?>">
-                <label for="nombre">Nombre de usuario:</label>
-                <input type="text" id="nombre" name="nombre" value="<?php echo $nombre_usuario; ?>" readonly>
+            <form method="GET" action="<?php echo isset($_GET['id']) ? '../../php/modificar-paciente.php' : '../../php/agregar-paciente.php'; ?>">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="<?php echo $nombre_paciente; ?>">
                 
                 <label for="apellido1">Primer apellido:</label>
-                <input type="text" id="apellido1" name="apellido1" value="<?php echo $apellido1_usuario; ?>">
+                <input type="text" id="apellido1" name="apellido1" value="<?php echo $apellido1_paciente; ?>">
 
                 <label for="apellido2">Segundo apellido:</label>
-                <input type="text" id="apellido2" name="apellido2" value="<?php echo $apellido2_usuario; ?>">
+                <input type="text" id="apellido2" name="apellido2" value="<?php echo $apellido2_paciente; ?>">
 
-                <label for="rol">Rol:</label>
-                <select name="rol" id="rol">
-                    <?php foreach ($response_roles as $rol): ?>
-                        <option value="<?php echo $rol['Id_Rol']; ?>" <?php if ($rol['DESCRIPCIONROL'] == $rol_usuario) echo 'selected'; ?>><?php echo $rol['DESCRIPCIONROL']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-
-                <input type="submit" value="Guardar cambios">
+                <input type="submit" value="Registrar paciente">
             </form>
         </div>
     </div>

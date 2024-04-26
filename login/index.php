@@ -36,6 +36,13 @@
             <div class="card">
                 <h5 class="card-header text-center"><img src="../img/4cb234b73934bd35d8237862250327df9ad0faea" class="imagen-login"> </h5>
                 <div class="card-body">
+                    <?php 
+                    if ($_GET['error']=="true") {
+                        ?>
+                        <h1>Usuario o contraseña incorrectos.</h1>
+                        <?php 
+                    }
+                    ?>
                     <form method="POST" action="../php/login.php">
                         <div class="form-group">
                             <label for="user">Usuario</label>

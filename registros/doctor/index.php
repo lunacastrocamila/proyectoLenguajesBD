@@ -14,29 +14,15 @@ function call_api($url) {
     return json_decode($response, true);
 }
 
-// Obtener todos los roles disponibles
-$url_roles = $api_url . '?query=' . urlencode('SELECT * FROM Rol');
-$response_roles = call_api($url_roles);
+// Obtener todas las especialidades disponibles
+$url_especialidades = $api_url . '?query=' . urlencode('SELECT Doctores.*, Especialidades.DescripcionEspecialidad FROM Doctores INNER JOIN Especialidades ON Doctores.Id_Especialidad = Especialidades.Id_Especialidad');
+$response_doctores = call_api($url_especialidades);
 
 // Inicializar variables para los valores del formulario
-$nombre_usuario = '';
-$apellido1_usuario = '';
-$apellido2_usuario = '';
-$rol_usuario = isset($response_roles[0]['DESCRIPCIONROL']) ? $response_roles[0]['DESCRIPCIONROL'] : '';
-
-// Obtener detalles del usuario si se proporciona un nombre de usuario en la URL
-if (isset($_GET['usuario'])) {
-    $usuario = $_GET['usuario'];
-    $query_sql = "SELECT Usuario.*, Rol.DescripcionRol FROM Usuario INNER JOIN Rol ON Usuario.Id_Rol = Rol.Id_Rol WHERE Usuario = '$usuario'";
-    $url_get_usuario = $api_url . '?query=' . urlencode($query_sql);
-    $response_usuario = call_api($url_get_usuario);
-    if ($response_usuario) {
-        $nombre_usuario = $response_usuario[0]['USUARIO'];
-        $apellido1_usuario = $response_usuario[0]['APELLIDO1USER'];
-        $apellido2_usuario = $response_usuario[0]['APELLIDO2USER'];
-        $rol_usuario = $response_usuario[0]['DescripcionRol'];
-    }
-}
+$nombre_doctor = isset($response_doctores[0]['NOMBREDOCTOR']) ? $response_doctores[0]['NOMBREDOCTOR'] : '';
+$apellido1_doctor = isset($response_doctores[0]['APELLIDO1DOCTOR']) ? $response_doctores[0]['APELLIDO1DOCTOR'] : '';
+$apellido2_doctor = isset($response_doctores[0]['APELLIDO2DOCTOR']) ? $response_doctores[0]['APELLIDO2DOCTOR'] : '';
+$especialidad = isset($response_doctores[0]['DESCRIPCIONESPECIALIDAD']) ? $response_doctores[0]['DESCRIPCIONESPECIALIDAD'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +30,7 @@ if (isset($_GET['usuario'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar usuario</title>
+    <title>Registrar doctor</title>
     <!-- Estilos CSS -->
     <style>
         body {
@@ -118,26 +104,26 @@ if (isset($_GET['usuario'])) {
 <body>
     <?php include '../../includes/menu.php'; ?>
     <div class="container">
-        <h1>Modificar usuario</h1>
+        <h1>Registrar nuevo doctor</h1>
         <div class="login">
-            <form method="GET" action="<?php echo isset($_GET['usuario']) ? '../../php/modificar-usuario.php' : '../../php/agregar-usuario.php'; ?>">
-                <label for="nombre">Nombre de usuario:</label>
-                <input type="text" id="nombre" name="nombre" value="<?php echo $nombre_usuario; ?>" readonly>
+            <form method="GET" action="<?php echo isset($_GET['id']) ? '../../php/modificar-doctor.php' : '../../php/agregar-doctor.php'; ?>">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="<?php echo $nombre_doctor; ?>">
                 
                 <label for="apellido1">Primer apellido:</label>
-                <input type="text" id="apellido1" name="apellido1" value="<?php echo $apellido1_usuario; ?>">
+                <input type="text" id="apellido1" name="apellido1" value="<?php echo $apellido1_doctor; ?>">
 
                 <label for="apellido2">Segundo apellido:</label>
-                <input type="text" id="apellido2" name="apellido2" value="<?php echo $apellido2_usuario; ?>">
+                <input type="text" id="apellido2" name="apellido2" value="<?php echo $apellido2_doctor; ?>">
 
-                <label for="rol">Rol:</label>
-                <select name="rol" id="rol">
-                    <?php foreach ($response_roles as $rol): ?>
-                        <option value="<?php echo $rol['Id_Rol']; ?>" <?php if ($rol['DESCRIPCIONROL'] == $rol_usuario) echo 'selected'; ?>><?php echo $rol['DESCRIPCIONROL']; ?></option>
+                <label for="especialidad">Especialidad:</label>
+                <select name="especialidad" id="especialidad">
+                    <?php foreach ($response_doctores as $doctor_item): ?>
+                        <option value="<?php echo $doctor_item['ID_ESPECIALIDAD']; ?>" <?php if ($doctor_item['DESCRIPCIONESPECIALIDAD'] == $especialidad) echo 'selected'; ?>><?php echo $doctor_item['DESCRIPCIONESPECIALIDAD']; ?></option>
                     <?php endforeach; ?>
                 </select>
 
-                <input type="submit" value="Guardar cambios">
+                <input type="submit" value="Registrar doctor">
             </form>
         </div>
     </div>
